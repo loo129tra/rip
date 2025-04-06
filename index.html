@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваня и его друг</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1c1c1c;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            color: white;
+            position: relative;
+            padding: 20px;
+            max-width: 80%;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 50px;
+        }
+
+        .read-button {
+            background-color: #333;
+            color: #fff;
+            border: 2px solid #ccc;
+            font-size: 1.5em;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.5s, transform 0.3s;
+        }
+
+        .read-button:hover {
+            background-color: #555;
+            transform: scale(1.1);
+        }
+
+        .read-button:active {
+            background-color: #777;
+        }
+
+        .fanfic-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+            margin-top: 30px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+            width: 100%;
+        }
+
+        .fanfic-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .fanfic-header {
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        @keyframes fanficAnimation {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Падение капель воды */
+        .rain {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .rain .drop {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: rain-fall 1s infinite;
+        }
+
+        @keyframes rain-fall {
+            0% {
+                top: -10px;
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        /* Стили для прокрутки на мобильных устройствах */
+        @media (max-width: 768px) {
+            .fanfic-content {
+                max-height: 50vh; /* Ограничение для мобильных */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rain" id="rain"></div>
+    <div class="container">
+        <h1 class="title">Друг Вани</h1>
+        <p>В доме Вани, на самом солнечном подоконнике, стоял Пипидастр. Он был не просто растением, а настоящим другом Вани. Они проводили много времени вместе, обсуждая всякие глупости, шутя и даже устраивая мини-конкурсы на то, кто из них лучше справляется с вопросами жизни и быта.</p>
+        <p>Однажды Ваня пришёл домой, заметив, что Пипидастр выглядит немного странно. Его листья, обычно такие зелёные и яркие, стали чуть-чуть тускнеть, а стебель — как будто прогибаться. Ваня сразу понял, что что-то не так.</p>
+        <p>• Пипидастр, ты что? — спросил он, подходя к растению.</p>
+        <p>Пипидастр, конечно, не мог ответить словами, но Ваня был уверен, что тот как будто шепчет ему на ушко. В этот момент Ваня решил устроить вечер веселья, чтобы поднять Пипидастру настроение. Он принёс огромную коробку чипсов, бутылку лимонада и стал рассказывать Пипидастру свои самые смешные истории из школы.</p>
+ 
+<button class="read-button" onclick="showFanfic()">Читать</button>
+
+        <div class="fanfic-content" id="fanficContent">
+            <h2 class="fanfic-header">Умерший друг Вани</h2>
+            <div class="fanfic-text">
+                <p>Пипидастр был самым загадочным растением в доме старого ботаника...</p>
+                <p>Вся комната была пропитана запахом старых книг и зелени, а сам Пипидастр, несмотря на свою скромную наружность, скрывал в себе огромную мудрость...</p>
+                <p>Однако время шло, и Пипидастр становился всё более тусклым и уставшим...</p>
+                <p>Однажды, когда Ваня пришёл домой, он заметил, что растение сильно ослабело. Листья почти не шевелились, а стебель был не таким крепким, как раньше...</p>
+                <p>Пипидастр умер, и Ваня похоронил его в саду, долго плача о своём старом друге. Прощание было трудным, но Ваня знал, что Пипидастр всегда останется в его сердце...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Функция для показа фанфика
+        function showFanfic() {
+            const button = document.querySelector('.read-button');
+            const fanficContent = document.querySelector('.fanfic-content');
+            
+            // Анимация исчезновения кнопки
+            button.style.opacity = 0;
+            button.style.pointerEvents = 'none';
+
+            // Плавное появление контента с анимацией
+            setTimeout(() => {
+                fanficContent.style.display = 'block';
+                fanficContent.style.opacity = 1;
+                fanficContent.style.animation = 'fanficAnimation 2s ease';
+            }, 500);
+            
+            // Убираем капли воды, когда нажата кнопка
+            document.querySelector('.rain').style.display = 'none';
+        }
+
+        // Функция для создания капель воды
+        function createRain() {
+            const rain = document.getElementById('rain');
+            for (let i = 0; i < 100; i++) {
+                const drop = document.createElement('div');
+                drop.classList.add('drop');
+                drop.style.width = Math.random() * 5 + 'px';
+                drop.style.height = drop.style.width;
+                drop.style.left = Math.random() * 100 + '%';
+                drop.style.animationDuration = Math.random() * 2 + 2 + 's';
+                rain.appendChild(drop);
+            }
+        }
+
+        // Запуск эффекта дождя
+        createRain();
+    </script>
+</body>
+</html>
